@@ -23,4 +23,18 @@ public class LocationService {
         return locationList;
     }
 
+    @Transactional
+    public Location save(Location location) {
+
+        if(location == null) {
+
+            throw new RuntimeException("Location is null in LocationService");
+
+        }
+
+        location = locationRepository.save(location);
+        return location;
+
+    }
+
 }

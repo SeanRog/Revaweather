@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -42,16 +43,20 @@ public class AppUser {
     @JoinColumn(name="role_id")
     private AppUserRole appUserRole;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_locations",
-//            joinColumns = { @JoinColumn(name = "user_id")},
-//            inverseJoinColumns = { @JoinColumn(name = "location_id")}
-//    )
-//    private Set<Location> locations;
-//
-//    @OneToOne
-//    @JoinTable(name = "locations")
-//    private Location location;
+    @ManyToMany
+    @JoinTable(
+            name = "users_locations",
+            joinColumns = { @JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "location_id")}
+    )
+    private List<Location> locations;
+
+    @ManyToOne
+    @JoinTable(
+            name = "users_locations",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "location_id") }
+    )
+    private Location location;
 
 }
